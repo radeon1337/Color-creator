@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Color create</title>
+</head>
+    <body>
+        <div class="container">
+            <div class="info"><i>Color Creator</i></div>
+            <div id="color"></div>
+            <div class="red">
+                <input type="range" min="0" max="255" step="1" id = "Red"  value="0" required>
+                <span>Red</span>
+            </div>
+            <div class="blue">
+                <input type="range" min="0" max = "255" step ="1" id = "Green" value="0" required>
+                <span>Green</span>
+            </div>
+            <div class="green">
+                <input type="range" min="0" max="255" step="1" id = "Blue" value="0" required>
+                <span>Blue</span>
+            </div>
+            <div class="alpha">
+                <input type="range" min="0" max="1" step="0.1" id="Alpha" value="1" required>
+                <span>Alpha</span>
+            </div>
+            <div class="swap">
+                <label for="ALphaSwap" title="specifies the opacity for a color.">Alpha</label>
+                <input type="checkbox" id="AlphaSwap">
+            </div>
+            <div id="output">
+                <input type="text" id ="Val" value="rgba(0,0,0,1)">
+            </div>
+        </div>
+
+        <script>
+            const out  = document.getElementById("output");
+            const val = document.getElementById("Val");
+
+
+            let r = document.querySelector("#Red");
+            let r_num = r.value;
+            r.addEventListener("input",function () {
+                r_num = parseFloat(r.value);
+                document.getElementById("color").style.backgroundColor = `rgba(${r_num},${g_num},${b_num},${a_num})`;
+                out.innerHTML = `<input type="text" value="rgba(${r_num},${g_num},${b_num},${a_num})">`;
+            });
+            
+
+            let g = document.querySelector("#Green");
+            let g_num = g.value; 
+            g.addEventListener("input",function () {
+                g_num = parseFloat(g.value);
+                document.getElementById("color").style.backgroundColor = `rgb(${r_num},${g_num},${b_num},${a_num})`;
+                out.innerHTML = `<input type="text" value="rgba(${r_num},${g_num},${b_num},${a_num})">`;
+            });
+            
+
+            let b = document.querySelector("#Blue");
+            let b_num = b.value;
+            b.addEventListener("input",function () {
+                b_num = parseFloat(b.value);
+                document.getElementById("color").style.backgroundColor = `rgb(${r_num},${g_num},${b_num}, ${a_num})`
+                out.innerHTML = `<input type="text" value="rgba(${r_num},${g_num},${b_num},${a_num})">`;
+            });
+            
+
+            let a = document.querySelector("#Alpha");
+            let a_num = 1;
+            a.addEventListener("input",function () {
+                a_num = parseFloat(a.value);
+                document.getElementById("color").style.backgroundColor = `rgba(${r_num},${g_num},${b_num},${a_num})`;
+                out.innerHTML = `<input type="text" value="rgba(${r_num},${g_num},${b_num},${a_num})">`;
+            });
+            
+
+            let check = document.getElementById("AlphaSwap");
+            check.addEventListener("click",function (){
+                if(check.checked){
+                    document.getElementsByClassName("alpha")[0].style.visibility = "visible";
+                }else{
+                    document.getElementsByClassName("alpha")[0].style.visibility = "hidden";
+                }
+            });
+            
+            val.addEventListener("input",function() {
+                let val_str = val.value.slice(5,-1).split(",");
+                // console.log(val_str);
+                document.getElementById("color").style.backgroundColor = `rgba(${val_str[0]},${val_str[1]},${val_str[2]},${val_str[3]})`;
+                r_num = val_str[0];
+                r.value = val_str[0];
+                g_num = val_str[1];
+                g.value = val_str[1];
+                b_num = val_str[2];
+                b.value = val_str[2];
+                a_num = val_str[3];
+                a.value = val_str[3];
+            });
+            
+            
+        </script>
+    </body>
+    </html>
